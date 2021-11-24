@@ -98,15 +98,16 @@ _EOF_
 
 essentials(){
 	sudo apt install ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
+
+	#installing and configurings flatpak
+	sudo apt install flatpak -yy
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
 home_use(){
 	#installing few softwares that needs for daily life
 	sudo apt install vlc gimp -yy
 
-	#installing and configurings flatpak
-	sudo apt install flatpak -yy
-	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	
 	# Some additional terminal tools
 	sudo apt install neovim
