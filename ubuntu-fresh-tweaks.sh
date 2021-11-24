@@ -20,9 +20,9 @@ Please select one of following category:
 README.md file.)
 	
 		1) Essential Tweaks only.
-		2) Install software packages for home use.
-		3) Inatall software packages for Student Computer.
-		4) Install software packeges for Developer System.
+		2) Cruiserweight.
+		3) Average.
+		4) Heavyweight.
 
 _EOF_
 
@@ -57,6 +57,15 @@ python(){
 	sudo apt-get install python3 python3-venv python3-pip
 }
 
+laptop_battery(){
+	sudo apt install tlp -yy
+	sudo snap install auto-cpufreq
+	sudo systemctl enable snap.auto-cpufreq.service.service
+	systemctl start snap.auto-cpufreq.service.service
+
+}
+
+
 # Selecting softwares
 #
 sel_browser(){
@@ -79,6 +88,27 @@ case $choose_browser in
 esac
 }
 
+sel_laptop(){
+laptop=2
+clear
+cat << _EOF_
+There are some recommended tweaks for laptop computers.
+Do you want to install them on this computer?
+		1) Yes
+		2) No
+
+_EOF_
+clear
+echo -n "Default: (2)" 
+read laptop
+
+case $laptop in
+	1) 
+		laptop_battery;;
+	2)
+		continue;;
+esac
+}
 #Installation steps
 #
 first_step(){
@@ -97,14 +127,15 @@ _EOF_
 }
 
 essentials(){
-	sudo apt install ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
+	sel_laptop
+	sudo apt install git ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
 
 	#installing and configurings flatpak
 	sudo apt install flatpak -yy
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
-home_use(){
+cruiserweight(){
 	#installing few softwares that needs for daily life
 	sudo apt install vlc gimp -yy
 
@@ -114,15 +145,23 @@ home_use(){
 	sudo snap install bat lsd
 }
 
-student(){
+average(){
 	essentials
-	home_use
+	cruiserweight
 	vs_code
+	
+	sudo snap install starship #install cross platform shell prompt for bash
  
 }
 
-developer(){
+heavyweight(){
 	student
+	sudo apt install kitty
+	
+	#install zsh with powerline10k theme
+	sudo apt install zsh
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 }
 
 final_step(){
@@ -134,11 +173,11 @@ case $choose_C in
 	1)
 		first_step; sleep 3 ; essentials; sleep 3; final_step;;
 	2)
-		sel_browser; first_step; sleep 3; home_use; sleep 3; final_step;;
+		sel_browser; first_step; sleep 3; cruiserweight; sleep 3; final_step;;
 	3)
-		sel_browser; first_step; sleep 3; student; sleep 3; final_step;;
+		sel_browser; first_step; sleep 3; average; sleep 3; final_step;;
 	4)
-		sel_browser; first_step; sleep 3; developer; sleep 3; final_step;;
+		sel_browser; first_step; sleep 3; heavyweight; sleep 3; final_step;;
 	esac
 
 
