@@ -150,7 +150,9 @@ average(){
 	cruiserweight
 	vs_code
 	
-	sudo snap install starship #install cross platform shell prompt for bash
+	# Install starship. A cross platfor shell prompt.
+	sudo snap install starship
+	echo "eval "$(starship init bash)"" | tee -a ~/.bashrc
  
 }
 
