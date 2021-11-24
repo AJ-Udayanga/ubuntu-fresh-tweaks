@@ -5,11 +5,11 @@ By using ubuntu-fresh-tweaks you will be able to do following changes on your sy
 
 first of all, your system will be updated. The you can select one of following options.
 1. Essential Tweaks only.
-2. Home use.
-3. Student Computer.
-4. Developer System.                              
+2. Cruiserweight.
+3. Average.
+4. Heavyweight.                              
 
-## Essential tweaks only
+#### Essential tweaks only
 following packages will be installed.
 - ubuntu-restricted-extras 
 - grub-customizer 
@@ -20,8 +20,9 @@ following packages will be installed.
 - apt-transport-https 
 - wget
 - flatpak
+- laptop battery tweaks (if selected)
 
-## Home Use
+#### Cruiserweight
 Everything from essentials and following packages will be installed.
 - A web browser of choise
 - vlc media player
@@ -30,9 +31,12 @@ Everything from essentials and following packages will be installed.
 - rust-bat (cat alternative)
 - lsd (ls alternative)
 
-## Student Computer
-Everything from essentials and Home use, and following packages will be installed.
+#### Average
+Everything from cruiserweight, and following packages will be installed.
 - visual studio code
+- starship shell prompt
 
-## Developer system
-Everything from student.
+#### Heavyweight
+Everything from average and following tweaks
+- kitty terminal emulator
+- zsh with powerline10k theme
