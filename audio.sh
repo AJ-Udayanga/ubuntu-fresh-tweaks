@@ -18,16 +18,18 @@ cat << _EOF_
 			 
 	      If you have not installed Flatpak on your system
 	      please run the ubuntu-fresh-tweaks.sh and select
-	    first option shown as 1) Essentials before continue.
+	     first option shown as 1) Essentials before continue.
+	     
 _EOF_
 
 echo "Do you want to continue:(y/N)"
 read -n 1 -s choose
 echo
-sleep 2
 
-if [[$choose!="y"]||[$choose!="Y"]]
-then
+ansy=y
+ansY=Y
+
+if [ $choose != $ansy ] || [ $choose != $ansY ] ; then
 	exit 1
 fi
 
@@ -58,9 +60,8 @@ echo "System changes will be affected after rebooting the system"
 echo "Do you want to reboot the system now? (y/N)"
 read -n 1 -s choose_r
 
-if [$choose_r ="y"]||[$choose_r="Y"];
-then
+if [ $choose_r != $ansy ] || [ $choose_r != $ansY ] ; then
 	reboot
 else
-	exit 2
+	exit 1
 fi
