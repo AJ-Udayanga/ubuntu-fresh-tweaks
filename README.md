@@ -9,7 +9,7 @@ first of all, your system will be updated. The you can select one of following o
                 3) Student Computer.                              
                 4) Developer System.                              
 
-## essential tweaks only
+## Essential tweaks only
 following packages will be installed.
 - ubuntu-restricted-extras 
 - grub-customizer 
