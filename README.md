@@ -4,10 +4,10 @@ This script will simple install some important packages and do some tweaks on th
 By using ubuntu-fresh-tweaks you will be able to do following changes on your system.
 
 first of all, your system will be updated. The you can select one of following options.
-                1) Essential Tweaks only.
-                2) Home use.                              
-                3) Student Computer.                              
-                4) Developer System.                              
+                1. Essential Tweaks only.
+                2. Home use.                              
+                3. Student Computer.                              
+                4. Developer System.                              
 
 ## Essential tweaks only
 following packages will be installed.
