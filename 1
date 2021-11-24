@@ -1,0 +1,51 @@
+#!/bin/bash
+
+cat << _EOF_
+		Ubuntu-Fresh-Tweaks	Version: 0.0.1
+
+	  This script will install some imporatant and essential
+	packeges and will do some additional tweaks on this system.
+      	 please connect the system to the internet before continue.
+
+_EOF_
+
+echo "press any key to continue"
+read -n 1 -s
+
+cat << _EOF_
+
+Please select one of following category: 
+(More informations about installation packages can be found on
+README.md file.)
+	
+		1) Essential Tweaks only.
+		2) Install software packages for home use.
+		3) Inatall software packages for Student Computer.
+		4) Install software packeges for Developer System.
+
+_EOF_
+
+read -n 1 -s choose_C
+
+first-step(){
+	echo "First things fisrt, we are checking for new updates..."
+	echo 
+	sudo apt update && sudo apt upgrade
+}
+
+essentials(){
+	sudo apt install ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essentials
+	
+}
+
+final-step(){
+	sudo apt autoremove
+}
+
+if [choose_C =='1']
+then 
+	first-step
+	essentials
+
+fi
+
