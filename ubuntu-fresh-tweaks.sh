@@ -98,9 +98,9 @@ Do you want to install them on this computer?
 		2) No
 
 _EOF_
-clear
 echo -n "Default: (2)" 
 read laptop
+clear
 
 case $laptop in
 	1) 
