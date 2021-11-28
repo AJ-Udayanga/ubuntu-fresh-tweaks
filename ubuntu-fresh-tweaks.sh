@@ -31,6 +31,22 @@ clear
 
 # Software packeges
 
+snap_support(){
+echo "Do you want to configure Canonical Snap on yor system? (y/N)"
+rean -n 1 -s sel_snap
+echo
+
+ansy=y
+ansY=Y
+
+if [ $choose != $ansy ] || [ $choose != $ansY ] ; then
+	sudo apt install snapd
+
+	else
+		continue
+fi
+}
+
 brave_browser(){
 	sudo apt install apt-transport-https curl -yy
 
@@ -127,6 +143,7 @@ _EOF_
 }
 
 essentials(){
+	snap_support
 	sel_laptop
 	sudo apt install git ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
 
