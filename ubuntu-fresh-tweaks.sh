@@ -175,6 +175,7 @@ _EOF_
 }
 
 essentials() {
+	first_step
 	snap_support
 	sel_laptop
 	sudo apt install git ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
@@ -187,6 +188,7 @@ essentials() {
 cruiserweight() {
 	#installing few softwares that needs for daily life
 	essentials
+	sel_browser
 	sudo apt install vlc gimp -yy
 
 	# Some additional terminal tools
@@ -229,31 +231,26 @@ final_step() {
 
 case $choose_C in
 1)
-	first_step
+
 	sleep 3
 	essentials
 	sleep 3
 	final_step
 	;;
 2)
-	sel_browser
-	first_step
+
 	sleep 3
 	cruiserweight
 	sleep 3
 	final_step
 	;;
 3)
-	sel_browser
-	first_step
 	sleep 3
 	average
 	sleep 3
 	final_step
 	;;
 4)
-	sel_browser
-	first_step
 	sleep 3
 	heavyweight
 	sleep 3
