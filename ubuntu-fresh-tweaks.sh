@@ -271,9 +271,9 @@ read -r -n 1 -s choose_restart
 
 case $choose_restart in
 y)
-	reboot
+	sudo reboot
 	;;
 Y)
-	reboot
+	sudo reboot
 	;;
 esac
