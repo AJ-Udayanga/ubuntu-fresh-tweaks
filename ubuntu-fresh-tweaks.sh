@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#clear the current terminal
+clear
+
+# Declare variables
+ansy=y
+ansY=Y
+
 cat << _EOF_
 		Ubuntu-Fresh-Tweaks	Version: 0.0.1
 
@@ -31,6 +38,7 @@ clear
 
 # Software packeges
 
+# Cannonical snap support for snap disabled Debian/ Ubuntu based systems
 snap_support(){
 echo "Do you want to configure Canonical Snap on yor system? (y/N)"
 read -n 1 -s sel_snap
@@ -47,6 +55,7 @@ if [ $choose != $ansy ] || [ $choose != $ansY ] ; then
 fi
 }
 
+# Brave Browser
 brave_browser(){
 	sudo apt install apt-transport-https curl -yy
 
@@ -59,20 +68,24 @@ brave_browser(){
 	sudo apt install brave-browser -yy
 }
 
+# Chromium Browser
 chromium_browser(){
 	sudo apt install chromium-browser
 }
 
+# Microsoft visual studio code
 vs_code(){
 	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 	sudo apt install code
 }
 
+# Python 3
 python(){
 	sudo apt-get install python3 python3-venv python3-pip
 }
 
+# TLP and Auto-cpufreq for laptops
 laptop_battery(){
 	sudo apt install tlp -yy
 	sudo snap install auto-cpufreq
@@ -90,6 +103,7 @@ cat << _EOF_
 Select your choise of browser:
 	1) Brave Browser (A private secure browser)
 	2) Chromium Browser (The chrome without google)
+	3) Do not install any browser
 _EOF_
 
 echo "Please select one browser:"
@@ -101,6 +115,10 @@ case $choose_browser in
 		brave_browser; sleep 3;;
 	2)
 		chromium_browser; sleep 3;;
+	
+	3)
+		continue
+
 esac
 }
 
@@ -114,8 +132,8 @@ Do you want to install them on this computer?
 		2) No
 
 _EOF_
-echo -n "Default: (2)" 
-read laptop
+echo "Default: (2)" 
+read -n 1 -s laptop
 clear
 
 case $laptop in
@@ -156,6 +174,7 @@ essentials(){
 
 cruiserweight(){
 	#installing few softwares that needs for daily life
+	essentials
 	sudo apt install vlc gimp -yy
 
 	
@@ -210,3 +229,9 @@ cat << _EOF_
 
 _EOF_
 
+echo "Do you want to restart the system now?"
+read -n 1 -s choose_restart
+
+if [ $choose_restart != $ansy ] || [ $choose_restart != $ansY ] ; then
+	reboot
+fi
