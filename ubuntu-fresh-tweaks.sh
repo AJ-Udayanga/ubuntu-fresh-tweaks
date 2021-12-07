@@ -33,7 +33,7 @@ clear
 
 snap_support(){
 echo "Do you want to configure Canonical Snap on yor system? (y/N)"
-rean -n 1 -s sel_snap
+read -n 1 -s sel_snap
 echo
 
 ansy=y
@@ -140,6 +140,8 @@ first_step(){
 	# System successfuly updated #
 	==============================
 _EOF_
+
+sleep 3
 }
 
 essentials(){
