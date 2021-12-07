@@ -192,8 +192,8 @@ cruiserweight() {
 	sudo apt install vlc gimp -yy
 
 	# Some additional terminal tools
-	sudo apt install neovim
-	sudo snap install bat lsd
+	sudo apt install neovim bat
+	sudo snap install lsd
 }
 
 average() {
