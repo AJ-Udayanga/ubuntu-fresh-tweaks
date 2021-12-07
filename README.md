@@ -20,6 +20,7 @@ following packages will be installed.
 - apt-transport-https 
 - wget
 - flatpak
+- snapd
 - laptop battery tweaks (if selected)
 
 #### Cruiserweight
