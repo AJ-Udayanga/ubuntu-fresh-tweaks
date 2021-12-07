@@ -17,7 +17,7 @@ cat <<_EOF_
 _EOF_
 
 echo "press any key to continue"
-read -n 1 -s
+read -r -n 1 -s
 clear
 
 cat <<_EOF_
@@ -33,7 +33,7 @@ README.md file.)
 
 _EOF_
 
-read -n 1 -s choose_C
+read -r -n 1 -s choose_C
 clear
 
 # Software packeges
@@ -112,7 +112,7 @@ Select your choise of browser:
 _EOF_
 
 	echo "Please select one browser:"
-	read -n 1 -s choose_browser
+	read -r -n 1 -s choose_browser
 	clear
 
 	case $choose_browser in
@@ -143,7 +143,7 @@ Do you want to install them on this computer?
 
 _EOF_
 	echo "Default: (2)"
-	read -n 1 -s laptop
+	read -r -n 1 -s laptop
 	clear
 
 	case $laptop in
@@ -270,7 +270,7 @@ cat <<_EOF_
 _EOF_
 
 echo "Do you want to restart the system now?"
-read -n 1 -s choose_restart
+read -r -n 1 -s choose_restart
 
 case $choose_restart in
 y)
