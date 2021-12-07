@@ -7,7 +7,7 @@ clear
 ansy=y
 ansY=Y
 
-cat << _EOF_
+cat <<_EOF_
 		Ubuntu-Fresh-Tweaks	Version: 0.0.1
 
 	  This script will install some imporatant and essential
@@ -20,7 +20,7 @@ echo "press any key to continue"
 read -n 1 -s
 clear
 
-cat << _EOF_
+cat <<_EOF_
 
 Please select one of following category: 
 (More informations about installation packages can be found on
@@ -39,29 +39,35 @@ clear
 # Software packeges
 
 # Cannonical snap support for snap disabled Debian/ Ubuntu based systems
-snap_support(){
-echo "Do you want to configure Canonical Snap on yor system? (y/N)"
-read -n 1 -s sel_snap
-echo
+snap_support() {
+	clear
+	echo "Do you want to configure Canonical Snap on yor system? (y/N)"
+	read -n 1 -s sel_snap
+	echo
 
-ansy=y
-ansY=Y
+	ansy=y
+	ansY=Y
 
-if [ $choose != $ansy ] || [ $choose != $ansY ] ; then
-	sudo apt install snapd
+	case $sel_snap in
+	y)
+		sudo apt-get install snapd
+		;;
 
-	else
-		continue
-fi
+	Y)
+		sudo apt-get install snapd
+		;;
+
+	esac
+
 }
 
 # Brave Browser
-brave_browser(){
+brave_browser() {
 	sudo apt install apt-transport-https curl -yy
 
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 
-	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
 	sudo apt update -yy
 
@@ -69,24 +75,24 @@ brave_browser(){
 }
 
 # Chromium Browser
-chromium_browser(){
+chromium_browser() {
 	sudo apt install chromium-browser
 }
 
 # Microsoft visual studio code
-vs_code(){
+vs_code() {
 	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 	sudo apt install code
 }
 
 # Python 3
-python(){
+python() {
 	sudo apt-get install python3 python3-venv python3-pip
 }
 
 # TLP and Auto-cpufreq for laptops
-laptop_battery(){
+laptop_battery() {
 	sudo apt install tlp -yy
 	sudo snap install auto-cpufreq
 	sudo systemctl enable snap.auto-cpufreq.service.service
@@ -94,75 +100,81 @@ laptop_battery(){
 
 }
 
-
 # Selecting softwares
 #
-sel_browser(){
+sel_browser() {
 	# Select a browser and install it
-cat << _EOF_
+	cat <<_EOF_
 Select your choise of browser:
 	1) Brave Browser (A private secure browser)
 	2) Chromium Browser (The chrome without google)
 	3) Do not install any browser
 _EOF_
 
-echo "Please select one browser:"
-read -n 1 -s choose_browser
-clear
+	echo "Please select one browser:"
+	read -n 1 -s choose_browser
+	clear
 
-case $choose_browser in
+	case $choose_browser in
 	1)
-		brave_browser; sleep 3;;
+		brave_browser
+		sleep 3
+		;;
 	2)
-		chromium_browser; sleep 3;;
-	
+		chromium_browser
+		sleep 3
+		;;
+
 	3)
 		continue
+		;;
 
-esac
+	esac
 }
 
-sel_laptop(){
-laptop=2
-clear
-cat << _EOF_
+sel_laptop() {
+	laptop=2
+	clear
+	cat <<_EOF_
 There are some recommended tweaks for laptop computers.
 Do you want to install them on this computer?
 		1) Yes
 		2) No
 
 _EOF_
-echo "Default: (2)" 
-read -n 1 -s laptop
-clear
+	echo "Default: (2)"
+	read -n 1 -s laptop
+	clear
 
-case $laptop in
-	1) 
-		laptop_battery;;
+	case $laptop in
+	1)
+		laptop_battery
+		;;
 	2)
-		continue;;
-esac
+		continue
+		;;
+	esac
 }
 #Installation steps
 #
-first_step(){
+first_step() {
 
 	# Update the system
 	echo
 	echo "First things fisrt, we are checking for new updates..."
-	echo 
+	echo
 	sudo apt update && sudo apt upgrade -yy
 
-	cat << _EOF_
+	cat <<_EOF_
 	==============================
 	# System successfuly updated #
 	==============================
 _EOF_
 
-sleep 3
+	sleep 1
 }
 
-essentials(){
+essentials() {
 	snap_support
 	sel_laptop
 	sudo apt install git ubuntu-restricted-extras grub-customizer synaptic bleachbit build-essential software-properties-common apt-transport-https wget -yy
@@ -172,56 +184,84 @@ essentials(){
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 }
 
-cruiserweight(){
+cruiserweight() {
 	#installing few softwares that needs for daily life
 	essentials
 	sudo apt install vlc gimp -yy
 
-	
 	# Some additional terminal tools
 	sudo apt install neovim
 	sudo snap install bat lsd
 }
 
-average(){
-	essentials
+average() {
 	cruiserweight
 	vs_code
-	
+
 	# Install starship. A cross platfor shell prompt.
 	sudo snap install starship
-	echo "eval "$(starship init bash)"" | tee -a ~/.bashrc
- 
+	sleep 1
+	clear
+	cat <<_EOF_
+NOTICE !!!
+
+Starship cross-platform shell prompt was installed.
+Please visit starship.rs to see how to configure
+your shell to use starship.
+
+_EOF_
+	sleep 3
 }
 
-heavyweight(){
+heavyweight() {
 	student
 	sudo apt install kitty
-	
+
 	#install zsh with powerline10k theme
 	sudo apt install zsh
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 }
 
-final_step(){
+final_step() {
 	sudo apt autoremove
 }
 
-
 case $choose_C in
-	1)
-		first_step; sleep 3 ; essentials; sleep 3; final_step;;
-	2)
-		sel_browser; first_step; sleep 3; cruiserweight; sleep 3; final_step;;
-	3)
-		sel_browser; first_step; sleep 3; average; sleep 3; final_step;;
-	4)
-		sel_browser; first_step; sleep 3; heavyweight; sleep 3; final_step;;
-	esac
+1)
+	first_step
+	sleep 3
+	essentials
+	sleep 3
+	final_step
+	;;
+2)
+	sel_browser
+	first_step
+	sleep 3
+	cruiserweight
+	sleep 3
+	final_step
+	;;
+3)
+	sel_browser
+	first_step
+	sleep 3
+	average
+	sleep 3
+	final_step
+	;;
+4)
+	sel_browser
+	first_step
+	sleep 3
+	heavyweight
+	sleep 3
+	final_step
+	;;
+esac
 
-
-cat << _EOF_
+cat <<_EOF_
 
 	===================================
 	# Opertaion Successfuly Completed #
@@ -232,6 +272,11 @@ _EOF_
 echo "Do you want to restart the system now?"
 read -n 1 -s choose_restart
 
-if [ $choose_restart != $ansy ] || [ $choose_restart != $ansY ] ; then
+case $choose_restart in
+y)
 	reboot
-fi
+	;;
+Y)
+	reboot
+	;;
+esac
