@@ -100,10 +100,11 @@ laptop_battery() {
 
 }
 
-# Selecting softwares
+# Selecting and installing softwares
 #
 sel_browser() {
 	# Select a browser and install it
+	clear
 	cat <<_EOF_
 Select your choise of browser:
 	1) Brave Browser (A private secure browser)
@@ -130,6 +131,39 @@ _EOF_
 		;;
 
 	esac
+}
+
+# Installing few selected Nerd Fonts
+install_fonts() {
+
+	clear
+	echo "Installing some core nerd fonts.."
+	sleep 1
+
+	if [ -d ~/.fonts ]; then
+		cp -r terminal_fonts/* ~/.fonts/
+
+	else
+		mkdir -p ~/.fonts
+		cp -r terminal_fonts/* ~/.fonts/
+
+	fi
+	cat <<_EOF_
+Following fonts have been successfully installed on your system...
+			- Hack Regular Nerd Font Complete Mono
+			- Caskaydia Cove Nerd Font Complete Mono Windows Compatible
+			- Caskaydia Cove Nerd Font Complete Mono
+		    - Caskaydia Cove Nerd Font Complete Windows Compatible
+			- Caskaydia Cove Nerd Font Complete
+			- Fira Code Bold Nerd Font Complete Mono
+			- Fira Code Bold Nerd Font Complete
+			- Fira Code Regular Nerd Font Complete Mono
+			- Fira Code Regular Nerd Font Complete
+
+If you prefer any other Nerd Font, please visit https://www.nerdfonts.com/font-downloads.
+
+_EOF_
+	sleep 3
 }
 
 sel_laptop() {
@@ -199,6 +233,7 @@ cruiserweight() {
 average() {
 	cruiserweight
 	vs_code
+	install_fonts
 
 	# Install starship. A cross platfor shell prompt.
 	sudo snap install starship
