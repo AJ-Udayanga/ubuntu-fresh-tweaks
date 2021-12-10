@@ -36,8 +36,9 @@ Everything from essentials and following packages will be installed.
 Everything from cruiserweight, and following packages will be installed.
 - visual studio code
 - starship shell prompt
-
+- few Nerd Fonts to work with starship
 #### Heavyweight
 Everything from average and following tweaks
 - kitty terminal emulator
 - zsh with powerline10k theme
+
