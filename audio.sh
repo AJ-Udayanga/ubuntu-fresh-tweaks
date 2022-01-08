@@ -1,12 +1,12 @@
 #!/bin/bash
 # This script will configure the system with easy-effcts and pipewire audio
 
-cat << _EOF_
+cat <<_EOF_
 
-        ==========================================================
-	||	Ubuntu-Fresh-Tweaks     Version: 0.0.1		||
-	||		Audio Tweaks for Ubuntu			||
-	||		  ###EasyEffects###			||
+  ==========================================================
+	||	      Ubuntu-Fresh-Tweaks     Version: 0.0.1	      ||
+	||		            Audio Tweaks for Ubuntu			          ||
+	||		              ###EasyEffects###			              ||
 	==========================================================
 
           This script will install some imporatant and essential
@@ -23,32 +23,34 @@ cat << _EOF_
 _EOF_
 
 echo "Do you want to continue:(y/N)"
-read -n 1 -s choose
-echo
+read -n 1 -s choose_i
 
-ansy=y
-ansY=Y
+case $choose_i in
+y)
+	easyEffects
+	;;
+Y)
+	easyEffects
+	;;
+esac
 
-if [ $choose != $ansy ] || [ $choose != $ansY ] ; then
-	exit 1
-fi
+easyEffects() {
+	# Installing and configuring pipewire
+	sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -yy
 
-# Installing and configuring pipewire
-sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -yy
+	sudo apt update -yy
 
-sudo apt update -yy
+	sudo apt install pipewire -yy
 
-sudo apt install pipewire -yy
+	sudo apt install gstreamer1.0-pipewire libspa-0.2-bluetooth libspa-0.2-jack -yy
 
-sudo apt install gstreamer1.0-pipewire libspa-0.2-bluetooth libspa-0.2-jack -yy
+	# Installing linux studio plugins
+	sudo apt install lsp-plugins -yy
 
-# Installing linux studio plugins
-sudo apt install lsp-plugins -yy
+	# Installing EasyEffest from flathub.org
+	flatpak install flathub com.github.wwmm.easyeffects
 
-# Installing EasyEffest from flathub.org
-flatpak install flathub com.github.wwmm.easyeffects
-
-cat << _EOF_
+	cat <<_EOF_
 
 	===========================================
 	|| Installation successfully completed...||
@@ -56,12 +58,16 @@ cat << _EOF_
 
 _EOF_
 
-echo "System changes will be affected after rebooting the system"
-echo "Do you want to reboot the system now? (y/N)"
-read -n 1 -s choose_r
+	echo "System changes will be affected after rebooting the system"
+	echo "Do you want to reboot the system now? (y/N)"
+	read -n 1 -s choose_r
+}
 
-if [ $choose_r != $ansy ] || [ $choose_r != $ansY ] ; then
-	reboot
-else
-	exit 1
-fi
+case $choose_r in
+y)
+	sudo reboot
+	;;
+Y)
+	sudo reboot
+	;;
+esac
