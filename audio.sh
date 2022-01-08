@@ -3,10 +3,10 @@
 
 cat <<_EOF_
 
-  ==========================================================
-	||	      Ubuntu-Fresh-Tweaks     Version: 0.0.1	      ||
-	||		            Audio Tweaks for Ubuntu			          ||
-	||		              ###EasyEffects###			              ||
+  	==========================================================
+	||	      Ubuntu-Fresh-Tweaks     Version: 1.0.0	     ||
+	||		            Audio Tweaks for Ubuntu			     ||
+	||		              ###EasyEffects###		             ||
 	==========================================================
 
           This script will install some imporatant and essential
